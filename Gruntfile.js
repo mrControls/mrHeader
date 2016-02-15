@@ -1,6 +1,5 @@
 var appName = 'mr-header';
 var libs = [
-    'node_modules/angular/angular.min.js'
 ];
 
 module.exports = function(grunt) {
