@@ -57,10 +57,13 @@
   min-width: 325px; }
 
 .header > .brand-image, .header > .brand-name {
-  display: inline-block; }
+  display: inline-block;
+  vertical-align: middle; }
 
 .header > .brand-image > img {
-  width: 62.5px; }
+  display: inline-block;
+  width: 62.5px;
+  vertical-align: middle; }
 
 .mr-nav-list-item {
   display: inline-block;
@@ -75,9 +78,10 @@
   -o-transition: font 0.2s ease;
   transition: font 0.2s ease;
   text-align: center; }
-  .mr-nav-list-item .selected {
-    color: #000;
-    font-size: 38.5px; }
+
+.mr-nav-list-item.selected {
+  color: #000;
+  font-size: 38.5px; }
 
 .mr-menu-close {
   color: #fff; }
@@ -129,7 +133,10 @@
     padding-bottom: 0.5em;
     border-top: 1px solid rgba(255, 255, 255, 0.25); }
     .mr-nav-list-item * {
-      color: #aaa; }
+      color: #aaa !important; }
+
+  .mr-nav-list-item.selected {
+    color: #fff !important; }
 
   #mr-navbar > .mr-navbar-wrapper, .header-brand-wrapper > .header {
     min-width: 200px; }

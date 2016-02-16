@@ -26,7 +26,7 @@ angular.module("templates/header.tpl.html", []).run(["$templateCache", function(
 
 angular.module("templates/navbar-item.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navbar-item.tpl.html",
-    "<li class=\"mr-nav-list-item row\" ng-click=\"itemClick($event)\" ng-transclude></li>");
+    "<li class=\"mr-nav-list-item row\" ng-click=\"itemClick()\" ng-transclude></li>");
 }]);
 
 angular.module("templates/navbar.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -51,8 +51,9 @@ angular.module('mrHeader', ['mrHeaderTemplates'])
 		angular.element(document.querySelector( 'body' )).removeClass('sidebar-mask');
 		$scope.menuOpen = false;
 	}
-	$scope.itemClick = function($event) {
-		console.log($event);
+
+	$scope.itemClick = function() {
+		console.log('event');
 	}
 }])
 .directive('mrHeader', function() {

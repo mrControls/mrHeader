@@ -10,8 +10,9 @@ angular.module('mrHeader', ['mrHeaderTemplates'])
 		angular.element(document.querySelector( 'body' )).removeClass('sidebar-mask');
 		$scope.menuOpen = false;
 	}
-	$scope.itemClick = function($event) {
-		console.log($event);
+
+	$scope.itemClick = function() {
+		console.log('event');
 	}
 }])
 .directive('mrHeader', function() {
