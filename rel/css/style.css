@@ -135,7 +135,7 @@
     .mr-nav-list-item * {
       color: #aaa !important; }
 
-  .mr-nav-list-item.selected {
+  .mr-nav-list-item.selected * {
     color: #fff !important; }
 
   #mr-navbar > .mr-navbar-wrapper, .header-brand-wrapper > .header {

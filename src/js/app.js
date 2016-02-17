@@ -11,7 +11,7 @@ angular.module("templates/header-brand.tpl.html", []).run(["$templateCache", fun
 
 angular.module("templates/header.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/header.tpl.html",
-    "<div class=\"mr-header\" id=\"mr-header\" ng-controller=\"HeaderController\">\n" +
+    "<div class=\"mr-header\" id=\"mr-header\">\n" +
     "	<div class=\"menu-btn-wrapper hidden-md hidden-lg\" id=\"mr-menu-btn\">\n" +
     "		<button class=\"mr-menu-open\" ng-if=\"!menuOpen\" ng-click=\"openMenu()\">\n" +
     "			<span class=\"glyphicon glyphicon-menu-hamburger\"></span>\n" +
@@ -26,7 +26,7 @@ angular.module("templates/header.tpl.html", []).run(["$templateCache", function(
 
 angular.module("templates/navbar-item.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navbar-item.tpl.html",
-    "<li class=\"mr-nav-list-item row\" ng-click=\"itemClick()\" ng-transclude></li>");
+    "<li class=\"mr-nav-list-item row\" ng-click=\"itemClick($event)\" ng-transclude></li>");
 }]);
 
 angular.module("templates/navbar.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -39,44 +39,43 @@ angular.module("templates/navbar.tpl.html", []).run(["$templateCache", function(
     "</div>");
 }]);
 
-angular.module('mrHeader', ['mrHeaderTemplates'])
-.controller('HeaderController', ['$scope', function($scope) {
-	$scope.menuOpen = false;
-	$scope.openMenu = function() {
-		angular.element(document.querySelector( 'body' )).addClass('sidebar-mask');
-		$scope.menuOpen = true;
-	}
-
-	$scope.closeMenu = function () {
-		angular.element(document.querySelector( 'body' )).removeClass('sidebar-mask');
-		$scope.menuOpen = false;
-	}
-
-	$scope.itemClick = function() {
-		console.log('event');
-	}
-}])
-.directive('mrHeader', function() {
-	return {
-		templateUrl: 'templates/header.tpl.html',
-		transclude: true
-	}
-})
-.directive('mrHeaderBrand', function() {
-	return {
-		templateUrl: 'templates/header-brand.tpl.html',
-		transclude: true
-	}
-})
-.directive('mrNavbar', function() {
-	return {
-		templateUrl: 'templates/navbar.tpl.html',
-		transclude: true
-	}
-})
-.directive('mrNavbarItem', function() {
-	return {
-		templateUrl: 'templates/navbar-item.tpl.html',
-		transclude: true
-	}
+angular.module('mrHeader', [
+    'mrHeaderTemplates'
+]).directive('mrHeader', function() {
+    return {
+        templateUrl: 'templates/header.tpl.html',
+        transclude: true,
+        controller: ['$scope', function($scope) {
+            $scope.menuOpen = false;
+            $scope.openMenu = function() {
+                angular.element(document.querySelector('body')).addClass('sidebar-mask');
+                $scope.menuOpen = true;
+            }
+            $scope.closeMenu = function() {
+                angular.element(document.querySelector('body')).removeClass('sidebar-mask');
+                $scope.menuOpen = false;
+            }
+        }]
+    }
+}).directive('mrHeaderBrand', function() {
+    return {
+        templateUrl: 'templates/header-brand.tpl.html',
+        transclude: true
+    }
+}).directive('mrNavbar', function() {
+    return {
+        templateUrl: 'templates/navbar.tpl.html',
+        transclude: true
+    }
+}).directive('mrNavbarItem', function() {
+    return {
+        templateUrl: 'templates/navbar-item.tpl.html',
+        transclude: true,
+        controller: ['$scope', function($scope) {
+            $scope.itemClick = function(event) {
+                angular.element(document.querySelector('.mr-nav-list-item.selected')).removeClass('selected');
+                console.log(angular.element(event.currentTarget).addClass('selected'));
+            }
+        }]
+    }
 });
