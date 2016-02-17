@@ -1,6 +1,7 @@
 <div class="mr-navbar" id="mr-navbar">
 	<nav class="mr-navbar-wrapper  col-lg-9 col-md-9 col-sm-12 col-xs-12 text-lg-right text-md-right text-sm-center text-xs-center">
-		<ul class="mr-navbar-list nav container-fluid" ng-transclude>
+		<ul class="mr-navbar-list nav container-fluid">
+			<mr-navbar-item ng-repeat="item in navItems" action-id="item.id" actions="actions">{{ item.name }}</mr-navbar-item>
 		</ul>
 	</nav>
 </div>

@@ -26,14 +26,15 @@ angular.module("templates/header.tpl.html", []).run(["$templateCache", function(
 
 angular.module("templates/navbar-item.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navbar-item.tpl.html",
-    "<li class=\"mr-nav-list-item row\" ng-click=\"itemClick($event)\" ng-transclude></li>");
+    "<li class=\"mr-nav-list-item row\" ng-click=\"actions.itemClick($event, id)\" ng-transclude></li>");
 }]);
 
 angular.module("templates/navbar.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navbar.tpl.html",
     "<div class=\"mr-navbar\" id=\"mr-navbar\">\n" +
     "	<nav class=\"mr-navbar-wrapper  col-lg-9 col-md-9 col-sm-12 col-xs-12 text-lg-right text-md-right text-sm-center text-xs-center\">\n" +
-    "		<ul class=\"mr-navbar-list nav container-fluid\" ng-transclude>\n" +
+    "		<ul class=\"mr-navbar-list nav container-fluid\">\n" +
+    "			<mr-navbar-item ng-repeat=\"item in navItems\" action-id=\"item.id\" actions=\"actions\">{{ item.name }}</mr-navbar-item>\n" +
     "		</ul>\n" +
     "	</nav>\n" +
     "</div>");
@@ -65,16 +66,28 @@ angular.module('mrHeader', [
 }).directive('mrNavbar', function() {
     return {
         templateUrl: 'templates/navbar.tpl.html',
-        transclude: true
+        scope: 
+            {
+                navItems: '=items',
+                actions: '=actions'
+            },
+        transclude: true,
+        controller: ['$scope', function($scope) {
+        }]
     }
 }).directive('mrNavbarItem', function() {
     return {
         templateUrl: 'templates/navbar-item.tpl.html',
+        scope: {
+            'actions': '=',
+            'id': '=actionId'
+        },
         transclude: true,
         controller: ['$scope', function($scope) {
-            $scope.itemClick = function(event) {
-                angular.element(document.querySelector('.mr-nav-list-item.selected')).removeClass('selected');
-                console.log(angular.element(event.currentTarget).addClass('selected'));
+            $scope.actions.setSelected = function(event) {
+                currentSelection = document.querySelector('.mr-nav-list-item.selected');
+                angular.element(currentSelection).removeClass('selected');
+                angular.element(event.currentTarget).addClass('selected'); 
             }
         }]
     }

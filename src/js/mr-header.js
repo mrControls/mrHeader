@@ -24,16 +24,28 @@ angular.module('mrHeader', [
 }).directive('mrNavbar', function() {
     return {
         templateUrl: 'templates/navbar.tpl.html',
-        transclude: true
+        scope: 
+            {
+                navItems: '=items',
+                actions: '=actions'
+            },
+        transclude: true,
+        controller: ['$scope', function($scope) {
+        }]
     }
 }).directive('mrNavbarItem', function() {
     return {
         templateUrl: 'templates/navbar-item.tpl.html',
+        scope: {
+            'actions': '=',
+            'id': '=actionId'
+        },
         transclude: true,
         controller: ['$scope', function($scope) {
-            $scope.itemClick = function(event) {
-                angular.element(document.querySelector('.mr-nav-list-item.selected')).removeClass('selected');
-                console.log(angular.element(event.currentTarget).addClass('selected'));
+            $scope.actions.setSelected = function(event) {
+                currentSelection = document.querySelector('.mr-nav-list-item.selected');
+                angular.element(currentSelection).removeClass('selected');
+                angular.element(event.currentTarget).addClass('selected'); 
             }
         }]
     }
