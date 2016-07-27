@@ -48,19 +48,19 @@
 
   .text-lg-justify {
     text-align: justify; } }
-#mr-header > .header-wrapper {
+#mr-header .header-wrapper {
   padding-top: 50px;
   min-height: 150px; }
 
-.header-brand-wrapper > .header {
+.header-brand-wrapper .header {
   font-size: 35px;
   min-width: 325px; }
 
-.header > .brand-image, .header > .brand-name {
+.header .brand-image, .header .brand-name {
   display: inline-block;
   vertical-align: middle; }
 
-.header > .brand-image > img {
+.header .brand-image > img {
   display: inline-block;
   width: 62.5px;
   vertical-align: middle; }
